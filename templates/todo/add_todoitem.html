@@ -1,0 +1,18 @@
+<!-- todo/todo_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        <form method="post">
+            {% csrf_token %}
+            {{ form.as_p }}
+            <input type="submit" value="Add ToDo Item">
+        </form>
+    {% endif %}
+</div>
+
+{% endblock %}

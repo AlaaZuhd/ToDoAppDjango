@@ -1,0 +1,49 @@
+<!-- todo/todo_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        {% if not object_list %}
+            No ToDo in this list.
+        {% endif %}
+        <ol class="list-group list-group-numbered">
+
+            {% for obj in object_list %}
+            <li class="list-group-item d-flex justify-content-between align-items-start">
+                <div class="ms-2 me-auto">
+                    <div class="fw-bold">
+                        {% if obj.is_completed %}
+                            <a href="{% url 'todo-detail' obj.id %}" style="text-decoration: line-through">{{ obj.title }}</a>
+                        {% else %}
+                            <a href="{% url 'todo-detail' obj.id %}" style="text-decoration: none">{{ obj.title }}</a>
+                        {% endif %}
+                    </div>
+                        {{ obj.description|slice:":50" }}
+                        {% if obj.description|length > 50%}
+                            ...
+                        {% endif %}
+                        {{ obj.is_completed }}
+                </div>
+                <span class="badge bg-primary rounded-pill">
+                    <a style="color:white; text-decoration: none" href="{% url 'todo-delete' obj.id %}">Delete</a>
+                </span>
+                {% if obj.is_completed %}
+                    <span class="badge bg-primary rounded-pill" style="background-color: rebeccapurple">
+                        <a style="color:white; text-decoration: none" href="{% url 'todo-is-completed-update' obj.id False %}">Undo</a>
+                    </span>
+                {% else %}
+                    <span class="badge bg-primary rounded-pill" style="background-color: rebeccapurple">
+                        <a style="color:white; text-decoration: none" href="{% url 'todo-is-completed-update' obj.id True %}">Done</a>
+                    </span>
+                {% endif %}
+            </li>
+        {% endfor %}
+        </ol>
+    {% endif %}
+</div>
+
+{% endblock %}

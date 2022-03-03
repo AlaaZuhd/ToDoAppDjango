@@ -1,0 +1,33 @@
+<!-- todo/todo_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        {% if not object %}
+            No ToDo in this list.
+        {% endif %}
+        <div class="card d-flex justify-content-center border border-secondary shadow-0 mb-3" style="width: 70%;">
+            <div class="card-body">
+                <h5 class="card-title">{{ object.title }}</h5>
+                <h6 class="card-subtitle mb-2 text-muted">
+                    <span class="badge bg-primary rounded-pill" style="background-color: rebeccapurple">
+                        {% if object.is_completed %} Completed {% else %} Uncompleted {% endif %}
+                    </span>
+                    <span class="badge bg-primary rounded-pill" style="background-color: rebeccapurple">
+                        {% if object.is_important %} Important {% else %} Unimportant {% endif %}
+                    </span>
+                </h6>
+                <p class="card-text">{{ object.description }}</p>
+                <a href="{% url 'todo-delete' object.id %}" class="card-link">Delete</a>
+                <a href="{% url 'todo-update' object.id %}" class="card-link">Update</a>
+            </div>
+            <div class="card-footer text-muted">Updated at: {{ object.updated_date|date }}</div>
+        </div>
+    {% endif %}
+</div>
+
+{% endblock %}

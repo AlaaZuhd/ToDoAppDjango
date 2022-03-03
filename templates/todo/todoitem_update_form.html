@@ -1,0 +1,15 @@
+<!-- todo/todo_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    <form method="post">{% csrf_token %}
+        {{ form.as_p }}
+        <input type="submit" value="Update">
+    </form>
+</div>
+
+{% endblock %}

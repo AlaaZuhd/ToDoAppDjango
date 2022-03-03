@@ -1,0 +1,24 @@
+<!-- todo/todo_list.html -->
+
+{% extends 'base.html' %}
+
+{% block content %}
+Hello, {{ user.username|default:'Guest' }}!
+
+<div>
+    {% if user.is_authenticated %}
+        {% if not object %}
+            No ToDo in this list.
+        {% endif %}
+        Are u sure u want to delete {{ object.title }}
+        <a href="{% url 'todo-delete' object.id %}">Delete ToDo item</a>
+        <br>
+        {{ object.is_completed }}
+            <form method="post">{% csrf_token %}
+                <p>Are you sure you want to delete "{{ object }}"?</p>
+                <input type="submit" value="Confirm">
+            </form>
+    {% endif %}
+</div>
+
+{% endblock %}
