@@ -30,7 +30,18 @@ SECRET_KEY = "django-insecure-b@-0i^#q3ivpsb%w0djc!%=d9ltd(y(he1u%)u=)b0$)i2j&o%
 
 
 # SECURITY WARNING: don't run with debug turned on in production!
+#DEBUG = True
 DEBUG = True
+# HTTPS settings
+CSRF_COOKIE_SECURE = True
+SESSION_COOKIE_SECURE = True
+SECURE_SSL_REDIRECT = True
+
+
+# HSTS settings
+SECURE_HSTS_SECONDS = 31536000 # 1 year
+SECURE_HSTS_PRELOAD = True
+SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
 ALLOWED_HOSTS = ['infinite-wave-81439.herokuapp.com','127.0.0.1']
 
@@ -94,7 +105,7 @@ DATABASES = {
         'ENGINE': 'django.db.backends.postgresql_psycopg2',
         'NAME': 'todo_website',
         'USER': 'postgres',
-        'PASSWORD': "alaa@123", #env('DB_PASSWORD'),
+        'PASSWORD': env('DB_PASSWORD'), #"alaa@123", #env('DB_PASSWORD'),
         'HOST': '127.0.0.1',
         'PORT': '5432',
     }
