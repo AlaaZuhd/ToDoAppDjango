@@ -43,7 +43,7 @@ SECURE_HSTS_SECONDS = 31536000 # 1 year
 SECURE_HSTS_PRELOAD = True
 SECURE_HSTS_INCLUDE_SUBDOMAINS = True
 
-ALLOWED_HOSTS = ['infinite-wave-81439.herokuapp.com','127.0.0.1']
+ALLOWED_HOSTS = ['infinite-wave-81439.herokuapp.com','127.0.0.1', '0.0.0.0']
 
 
 # Application definition
