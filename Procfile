@@ -1,1 +1,1 @@
-web: gunicorn todo_website.wsgi
+web: python manage.py runserver
