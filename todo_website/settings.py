@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 import os
 import environ
 from pathlib import Path
+import django_heroku
 
 
 # Initialise environment variables
@@ -165,3 +166,7 @@ DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_REDIRECT_URL = "dashboard"
 LOGOUT_REDIRECT_URL = "dashboard"
+
+
+
+django_heroku.settings(locals())
